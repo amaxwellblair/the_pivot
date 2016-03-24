@@ -4,6 +4,8 @@ class Item < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
   has_many :orders, through: :line_items
 
+  belongs_to :store
+
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }

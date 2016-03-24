@@ -26,4 +26,12 @@ Rails.application.routes.draw do
   resources :categories, only: [:index]
 
   get "/:category", to: "categories#show", as: "category"
+
+  ###################
+  
+  resources :stores
+
+  namespace :stores, as: :store, path: ":store" do
+    resources :items, only: [:index, :show, :new, :create]
+  end
 end

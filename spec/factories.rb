@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :store do
+    name "MyString"
+    slug "MyString"
+  end
   factory :line_item do
     order nil
     item nil

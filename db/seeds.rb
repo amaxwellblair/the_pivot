@@ -1,11 +1,12 @@
 
 # File.expand_path("app/assets/images/filename", __dir__)
-
+# carrots = Category.create(title: "carrots", created_at: Time.now, image: "https://placekitten.com/200/200")
 charms = Category.create(title: "Charms", created_at: Time.now, image: "luck-shamrock-horseshoe.png")
 potions = Category.create(title: "Potions", created_at: Time.now, image: "felix_felicis.jpg")
 clothes = Category.create(title: "Clothes", created_at: Time.now, image: "lucky_shirt.jpg")
 weather = Category.create(title: "Weather", created_at: Time.now, image: "sunshine.png")
 
+# Item.create(title: "carrots", description: "crunchy and orange", price: 999 , image: "https://s3.amazonaws.com/lucky2/cartoon_penny.png", categories: [Category.find_by(title: "carrots")])
 Item.create(title: "Lucky Penny", description: "A shiny heads-up penny you found in the road!", price: 999 , image: "https://s3.amazonaws.com/lucky2/cartoon_penny.png", categories: [Category.find_by(title: "Charms")])
 
 Item.create(title: "Horseshoe", description: "Keep the open side pointed up so the luck doesn't drain out!", price: 1499, image: "https://s3.amazonaws.com/lucky2/horseshoe.png", categories: [Category.find_by(title: "Charms")])
