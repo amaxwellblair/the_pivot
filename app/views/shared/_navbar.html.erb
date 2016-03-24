@@ -4,6 +4,7 @@
       <a class="navbar-brand big-big-font" href="<%= root_path %>">Lucky Charms</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
+      ##<li><a href="<%= #categories_index_path %>" class="category-link">Categories</a></li>
         <% if current_user && current_user.admin? %>
           <li><a href="<%= logout_path %>" data-method="delete" class="cart-link">
           <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
