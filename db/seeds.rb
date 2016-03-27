@@ -1,4 +1,4 @@
-Role.create(name: "register_user")
+Role.create(name: "registered_user")
 Role.create(name: "store_admin")
 Role.create(name: "platform_admin")
 

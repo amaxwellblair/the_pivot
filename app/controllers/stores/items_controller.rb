@@ -15,16 +15,14 @@ class Stores::ItemsController < Stores::StoresController
 
   def create
     @item = current_store.items.new(item_params)
-    # @item.store_id = current_store.id
-    @categories = Category.all
     @item.categories = Category.all.select do |category|
       params[category.title] == "1"
     end
     if @item.save
-      flash[:alert] = "Item successfully created!"
+      flash[:success] = "Item successfully created!"
       redirect_to dashboard_path(tab: "store_info")
     else
-      flash.now[:alert] = "Something went terribly wrong!"
+      flash.now[:danger] = @item.errors.full_messages.join(", ")
       render :new
     end
   end
@@ -35,14 +33,13 @@ class Stores::ItemsController < Stores::StoresController
   end
 
   def update
-
     @item = current_store.items.find_by(id: params[:id])
     @categories = Category.all
     if @item.update_attributes(item_params)
-      flash[:alert] = "Item updated successfully."
+      flash[:success] = "Item updated successfully."
       redirect_to dashboard_path
     else
-      flash.now[:alert] = "Something went wrong."
+      flash.now[:danger] = @item.errors.full_messages.join(", ")
       render :edit
     end
   end

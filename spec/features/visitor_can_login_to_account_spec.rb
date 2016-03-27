@@ -4,6 +4,8 @@ RSpec.feature "visitor logs in" do
   context "enters valid username and password combination" do
     scenario "sees user dashboard page" do
       user = create(:user)
+      3.times{create(:role)}
+      user.roles << Role.find_by(name: "registered_user")
       visit "/"
       first(:link, "Login").click
       fill_in "Username", with: user.username

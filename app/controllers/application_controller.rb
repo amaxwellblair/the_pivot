@@ -13,12 +13,11 @@ class ApplicationController < ActionController::Base
     @user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def current_permission
-    @current_permission ||= Permission.new(current_user)
-  end
-
   def authorize!
-    render file: "public/404" unless authorize?
+    unless authorized?
+      flash[:danger] = "You are not allowed to visit this page."
+      redirect_to root_url
+    end
   end
 
   def set_cart
@@ -34,9 +33,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def authorized?
+      current_permission.allow?
+    end
 
-  def authorize?
-    current_permission.allow?(params[:controller], params[:action])
-  end
 
+    def current_permission
+      @current_permission ||= Permission.new(current_user, params[:controller], params[:action])
+    end
 end
