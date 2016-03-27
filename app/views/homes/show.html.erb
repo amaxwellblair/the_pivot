@@ -9,24 +9,24 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <%= image_tag "clover.png", alt: "Clover" %>
+      <img src="http://www.farmersmuseum.org/files/images/exhibitions/tfm-exhibitpage-carousel.jpg" alt="Smiley face" height="100" width="100">
       <div class="carousel-caption">
-        <h2>Buy now!</h2>
-        <h4>You need luck</h4>
+        <h2>Sign Up Now!</h2>
+        <h4>Create an account to take advantage of wonderful home-grown goods!</h4>
       </div>
     </div>
     <div class="item cat-div">
-      <%= image_tag "lucky_cat.png", alt: "Lucky Cat", class: "cat" %>
+      <img src="http://www.farmersmuseum.org/files/images/exhibitions/tfm-exhibitpage-carousel.jpg" alt="Smiley face" height="100" width="100">
       <div class="carousel-caption red-text">
-        <h2>Maneki-neko says:</h2>
-        <h4>Buy now to bring luck!</h4>
+        <h2>Freshest Products!</h2>
+        <h4>Click here to see what's newest and most fresh on the shelves!</h4>
       </div>
     </div>
     <div class="item">
-      <%= image_tag "lucky_leprechaun.jpg",  alt: "Charms" %>
+      <img src="http://www.farmersmuseum.org/files/images/exhibitions/tfm-exhibitpage-carousel.jpg" alt="Smiley face" height="100" width="100">
       <div class="carousel-caption">
-        <h2>Lucky charms!</h2>
-        <h4>You too can taste the golden rainbow!</h4>
+        <h2>Featured Market</h2>
+        <h4>See what out featured market has on special this week!</h4>
       </div>
     </div>
   </div>
@@ -42,17 +42,87 @@
 
 <div class="text-center row">
   <div class="padded-top padded-bottom">
-    <h1 class="green-font" >Featured Collections</h1>
+    <h1 class="green-font" >Featured Markets</h1>
   </div>
-  <div class="categories">
-    <%= render partial: "categories/category", collection: @categories %>
+  <!-- <div class="categories">
+    <%#=# render partial: "categories/category", collection: @categories %>
+  </div> -->
+  <div class="col-md-4">
+    <div class="item-display category-display">
+      <img src="http://billevansins.com/wp-content/uploads/2014/04/palouse-farm-country-eastern-washington.jpg" alt="Smiley face" height="100" width="100">
+      <div class="item-description text-center">
+        <div class="btn-font-size green-font">
+          <h4>"Mister's Market"</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="item-display category-display">
+      <img src="http://billevansins.com/wp-content/uploads/2014/04/palouse-farm-country-eastern-washington.jpg" alt="Smiley face" height="100" width="100">
+      <div class="item-description text-center">
+        <div class="btn-font-size green-font">
+          <h4>"Mister's Market"</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="item-display category-display">
+      <img src="http://billevansins.com/wp-content/uploads/2014/04/palouse-farm-country-eastern-washington.jpg" alt="Smiley face" height="100" width="100">
+      <div class="item-description text-center">
+        <div class="btn-font-size green-font">
+          <h4>"Mister's Market"</h4>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="text-center row">
   <div class="padded-bottom padded-top">
     <h1 class="green-font" >Featured Items</h1>
   </div>
-  <div class="items">
-    <%= render partial: "items/item", collection: @items %>
+
+
+
+  <div class="col-md-4">
+    <div class="item-display">
+      <img src="http://www.fullcircle.com/goodfoodlife/files/2012/05/Arugula_OPT.jpg" alt="Smiley face" height="100" width="100">
+      <h4>Arugula</h4>
+    </div>
+    <div class="btn-pricing">$3.99</div>
+
+  </div>
+</div>
+
+<div class="text-center row">
+  <div class="padded-bottom padded-top">
+    <h1 class="green-font" >Featured Items</h1>
+  </div>
+
+  <div class="col-md-4">
+    <div class="item-display">
+      <img src="http://www.fullcircle.com/goodfoodlife/files/2012/05/Arugula_OPT.jpg" alt="Smiley face" height="100" width="100">
+      <h4>Arugula</h4>
+    </div>
+    <div class="btn-pricing">$3.99</div>
+
+  </div>
+</div>
+
+<div class="text-center row">
+  <div class="padded-bottom padded-top">
+    <h1 class="green-font" >Featured Items</h1>
+  </div>
+  </div> -->
+  <div class="col-md-4">
+    <div class="item-display">
+      <img src="http://www.fullcircle.com/goodfoodlife/files/2012/05/Arugula_OPT.jpg" alt="Smiley face" height="100" width="100">
+      <h4>Arugula</h4>
+    </div>
+    <div class="btn-pricing">$3.99</div>
   </div>
 </div>

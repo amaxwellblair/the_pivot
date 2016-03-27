@@ -1,0 +1,12 @@
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+  <% stores.each do |store| %>
+    <tr>
+      <td><%= link_to store.name, store_path(store.name) %></td>
+      <td><%= "Available" %></td>
+    </tr>
+  <% end %>
+</table>

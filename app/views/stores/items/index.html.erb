@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Welcome to <%= current_store.name %></h1>
+
+    <% @items.each do |item| %>
+      <% item.title %>
+      <% item.description %>
+      <% item.price %>
+</div>
+
+<div class="text-center row">
+  <div class="padded-bottom">
+    <h1 class="green-font" ><%= current_store.name %></h1>
+    <h4 class="green-font" >Pick out your favorite produce. It's all grown locally.</h4>
+    <img src="http://www.18sandpiper.com/wp-content/uploads/2013/05/Farmer-Joe.jpg" alt="Farmers Market" style="width:250px;height:250px;">
+  </div>
+  <div class="items">
+    <div class="col-sm-3">
+        <img src="http://www.horseandbuggyproduce.com/wp-content/uploads/2010/12/carrots.jpg" alt="Carrots" style="width:100px;height:100px;"></br>
+        <p>$<%= item.price %></p>
+          <div class="btn-font-size green-font">
+            <%= link_to item.title, "#", class: "green-font" %>
+            <%= link_to "Add to cart", "#", class: "green-font" %>
+            <% end %>
+          </div>
+    </div>

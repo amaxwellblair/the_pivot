@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.feature "visitor can create account" do
   context "enters valid username and password" do
     scenario "visitor logs in and sees dashboard" do
+      3.times{create(:role)}
+
       visit "/"
       first(:link, "Create Account").click
 
@@ -26,6 +28,7 @@ RSpec.feature "visitor can create account" do
   context "enters an existing username" do
     scenario "sees error message and create account page" do
       user = create(:user)
+      3.times{create(:role)}
 
       visit "/"
       first(:link, "Create Account").click
