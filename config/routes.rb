@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :items, only: [:index, :show, :new, :create]
+  root to: "homes#show"
+
+  resources :stores, only: [:index, :new, :create, :update, :destroy]
+  resources :items, only: [:index]
 
   resources :cart_items, only: [:create, :destroy]
-  root to: "homes#show"
   get "/cart", to: "cart_items#index"
 
   resource :user, only: [:create, :new, :edit, :update, :show]
@@ -25,5 +27,15 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:index]
 
-  get "/:category", to: "categories#show", as: "category"
+  get "/categories/:category", to: "categories#show", as: "category"
+
+  get "/:slug/edit", to: "stores#edit", as: "edit_store"
+
+  namespace :stores, path: ":slug", as: :store do
+    get "", to: "items#index", as: "root"
+    # post "/items", to: "items#create", as: "items"
+
+    # get "/item", to: "items#edit", as: "edit_item"
+    resources :items, only: [:show, :new, :destroy, :edit, :create, :update]
+  end
 end

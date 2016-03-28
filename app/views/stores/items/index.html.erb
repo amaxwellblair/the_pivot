@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Welcome to <%= current_store.name %></h1>
+  <p>
+    <%= current_store.description %>
+  </p>
+  <div class="text-center row">
+    <% @items.each do |item| %>
+      <%= render partial: "shared/item" %>
+    <% end %>
+  </div>
+
+</div>

@@ -1,0 +1,28 @@
+<div class="well">
+  <div class="text-center green-font">
+    <%= form_for(@item, url: store_items_path) do |f| %>
+
+      <h4><%= f.label :title %></h4>
+      <h4><%= f.text_field :title %></h4>
+
+      <h4><%= f.label :description %></h4>
+      <h4><%= f.text_field :description %></h4>
+
+      <h4><%= f.label :price %></h4>
+      <h4><%= f.text_field :price %></h4>
+
+      <h4><%= f.label :categories %></h4>
+      <div >
+        <h4><% @categories.each do |category| %></h4>
+          <h4 id="category-check-<%= category.id %>"><%= f.check_box :categories, name: category.title %> <%= category.title.capitalize %></h4>
+        <% end %>
+      </div>
+
+      <h4><%= f.label :image %></h4>
+      <h4><%= f.file_field :image, class: "form-control" %></h4>
+
+      <h4><%= f.submit "Create Item", class: "btn btn-success btn-font-size" %></h4>
+
+    <% end %>
+  </div>
+</div>

@@ -1,8 +1,12 @@
 class Item < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
+
   has_many :category_items, dependent: :destroy
   has_many :categories, through: :category_items
   has_many :line_items, dependent: :destroy
   has_many :orders, through: :line_items
+
+  belongs_to :store
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :description, presence: true

@@ -7,11 +7,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       flash[:success] = "Logged in as #{@user.username}"
       session[:user_id] = @user.id
-      if @user.admin?
-        redirect_to admin_dashboard_index_path
-      else
-        redirect_to dashboard_path
-      end
+      redirect_to dashboard_path
     else
       flash.now[:danger] = "Invalid login details. Please try again."
       render :new
@@ -19,7 +15,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session.clear
     redirect_to root_path
+    flash[:success] = "You have been logged out."
   end
 end
