@@ -1,0 +1,26 @@
+<div class="container">
+  <div>
+  <h1>Presented by <%= current_store.name %></h1>
+    <h3><%= @item.title %></h3>
+      <li><%= @item.description %></li>
+      <li><%= @item.price %></li>
+  </div>
+
+  <div class="text-center row">
+    <div class="padded-bottom">
+      <h1 class="green-font" ><%= @item.title %></h1>
+        <h4 class="green-font" ><%= @item.description %></h4>
+        <img src="http://www.horseandbuggyproduce.com/wp-content/uploads/2010/12/carrots.jpg" alt="Carrots" style="width:250px;height:250px;"></br>
+      <%= link_to @item.title, "#", class: "green-font" %>
+        <%= link_to "Add to cart", "#", class: "green-font" %>
+        <p>$<%= @item.price %></p>
+    </div>
+    <div class="items">
+      <div class="col-sm-3">
+          <div class="btn-font-size green-font">
+            <img src="http://www.18sandpiper.com/wp-content/uploads/2013/05/Farmer-Joe.jpg" alt="Farmers Market" style="width:100px;height:100px;">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<% current_user.stores.each do |store| %>
+  <%= link_to "Update store", edit_store_path(store.slug), class: "btn btn-success btn-font-size" %>
+  <%= link_to "Delete store", store_path(store.slug), class: "btn btn-success btn-font-size", method: :delete, data: {confirm: "Are you sure you want to do this???"} %>
+  <%= link_to "Create item", new_store_item_path(current_user.stores.first.slug), class: "btn btn-success btn-font-size" if current_user.stores.first && store.approved?%>
+  <br>
+  <br>
+<% end %>
+<table class="table" id="item-table">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% items.each do |item| %>
+    <tr>
+      <td><%= link_to item.title, store_item_path(item.store.slug, item) %></td>
+      <td><%= format_price(item.price) %></td>
+      <td><%= link_to "Update Item", edit_store_item_path(item.store.slug, item) %></td>
+      <td><%= link_to "Delete Item", store_item_path(item.store.slug, item), method: :delete, data: {confirm: "Are you sure you want to delete this?"} %></td>
+    </tr>
+  <% end %>
+</table>

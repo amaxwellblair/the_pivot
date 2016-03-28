@@ -1,0 +1,8 @@
+<h3>Name: <%= user.fullname %></h3>
+<h3>Address: <%= user.address %></h3>
+<h3>Email: <%= user.email %></h3>
+
+<%= link_to "Update Account", edit_user_path, class: "btn btn-success btn-font-size" %>
+<%= link_to "All Orders", orders_path, class: "btn btn-success btn-font-size" %>
+
+<%= link_to "Create new store", new_store_path, class: "btn btn-success btn-font-size" %>

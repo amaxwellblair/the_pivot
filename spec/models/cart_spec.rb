@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe "Cart", type: :model do
   before(:each) do
+    create_integration
+    @item = Item.last
     @cart = Cart.new({"3" => 3, "1" => 1})
-    @item = create(:item)
   end
 
   it "can count items in cart" do
@@ -24,10 +25,9 @@ RSpec.describe "Cart", type: :model do
     @cart.update_quantity(false, @item)
 
     status, message = @cart.update_quantity(true, @item)
-
     expect(status).to eq(:danger)
     expect(message).to eq("1 #{@item.title} removed from cart!")
-    contents = { "3" => 3, "1" => 1, @item.id.to_s => 1 }
+    contents = {"3" => 3, "1" => 1, @item.id.to_s => 1}
     expect(@cart.contents).to eq contents
   end
 
@@ -47,6 +47,6 @@ RSpec.describe "Cart", type: :model do
 
   it "can calculate the total price of all cart items" do
     cart = Cart.new(@item.id.to_s => 4)
-    expect(cart.total).to eq 4
+    expect(cart.total).to eq @item.price*4
   end
 end

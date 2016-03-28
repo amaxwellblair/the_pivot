@@ -9,24 +9,24 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <%= image_tag "clover.png", alt: "Clover" %>
+      <%= image_tag "colorful-carrots.jpg", alt: "colorful carrots" %>
       <div class="carousel-caption">
-        <h2>Buy now!</h2>
-        <h4>You need luck</h4>
-      </div>
-    </div>
-    <div class="item cat-div">
-      <%= image_tag "lucky_cat.png", alt: "Lucky Cat", class: "cat" %>
-      <div class="carousel-caption red-text">
-        <h2>Maneki-neko says:</h2>
-        <h4>Buy now to bring luck!</h4>
+        <h2>Carrots Galore</h2>
+        <h4>Create an account to take advantage of wonderful home-grown goods</h4>
       </div>
     </div>
     <div class="item">
-      <%= image_tag "lucky_leprechaun.jpg",  alt: "Charms" %>
+        <%= image_tag "fresh-produce.jpg", alt: "fresh produce" %>
+        <div class="carousel-caption">
+        <h2>Freshest Products</h2>
+        <h4>Click here to see what's newest and most fresh on the shelves</h4>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "produce.jpg", alt: "produce" %>
       <div class="carousel-caption">
-        <h2>Lucky charms!</h2>
-        <h4>You too can taste the golden rainbow!</h4>
+        <h2>Featured Market</h2>
+        <h4>See what out featured market has on special this week!</h4>
       </div>
     </div>
   </div>
@@ -42,17 +42,25 @@
 
 <div class="text-center row">
   <div class="padded-top padded-bottom">
-    <h1 class="green-font" >Featured Collections</h1>
-  </div>
-  <div class="categories">
-    <%= render partial: "categories/category", collection: @categories %>
+    <h1 class="green-font">Featured Markets</h1>
+    <div class="stores">
+      <%= render partial: "shared/store", collection: @stores %>
+    </div>
   </div>
 </div>
 <div class="text-center row">
   <div class="padded-bottom padded-top">
-    <h1 class="green-font" >Featured Items</h1>
+    <h1 class="green-font">Featured Categories</h1>
+    <div class="categories">
+      <%= render partial: "shared/category", collection: @categories %>
+    </div>
   </div>
-  <div class="items">
-    <%= render partial: "items/item", collection: @items %>
+</div>
+<div class="text-center row">
+  <div class="padded-bottom padded-top">
+    <h1 class="green-font">Featured Items</h1>
+    <div class="items">
+      <%= render partial: "shared/item", collection: @items %>
+    </div>
   </div>
 </div>

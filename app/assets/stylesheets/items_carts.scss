@@ -16,10 +16,6 @@
   height: 520px;
 }
 
-.category-display {
-  height: 400px;
-}
-
 .item-display img {
   background-color: $white;
   border-radius: 5px;
@@ -28,8 +24,20 @@
   height: 60%;
 }
 
+.category-display {
+  height: 320px;
+}
+
 .category-display img {
-  height: 75%;
+  height: 80%;
+}
+
+.store-display {
+  height: 400px;
+}
+
+.store-display img {
+  height: 70%;
 }
 
 .item-btn {

@@ -1,36 +1,77 @@
+def create_roles
+  %w(registered_user store_admin platform_admin).each do |role|
+    role = Role.create(name: role)
+    puts "Created #{role.name}"
+  end
+end
 
-# File.expand_path("app/assets/images/filename", __dir__)
+def create_categories
+  %w(Organic Gluten-free Vegan Low-fat Local Free-range GMO Grass-fed Paleo Kosher).each do |category|
+    category = Category.create(title: category, created_at: Time.now, image: "http://cdn.theatlantic.com/static/mt/assets/food/4182898562_cfcf720592_b_wide.jpg")
+    puts "Created #{category.title}"
+  end
+end
 
-charms = Category.create(title: "Charms", created_at: Time.now, image: "luck-shamrock-horseshoe.png")
-potions = Category.create(title: "Potions", created_at: Time.now, image: "felix_felicis.jpg")
-clothes = Category.create(title: "Clothes", created_at: Time.now, image: "lucky_shirt.jpg")
-weather = Category.create(title: "Weather", created_at: Time.now, image: "sunshine.png")
+def create_registered_users
+  while User.joins(:roles).where("roles.name" => "registered_user").count < 99
+    user = User.create(username: Faker::Internet.user_name, email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, address: address, roles: [Role.find(1)])
+    puts "Created #{user.username}"
+  end
+  usr = User.create(username: "josh_mejia", password: "password", email: "josh@turing.io", first_name: "josh", last_name: "mejia", address: address, roles: [Role.find(1)])
+  puts "Created #{user.username}"
+end
 
-Item.create(title: "Lucky Penny", description: "A shiny heads-up penny you found in the road!", price: 999 , image: "https://s3.amazonaws.com/lucky2/cartoon_penny.png", categories: [Category.find_by(title: "Charms")])
+def create_store_admin
+  while User.joins(:roles).where("roles.name" => "store_admin").count < 19
+    user = User.create(username: Faker::Internet.user_name, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, address: address, roles: [Role.find(1), Role.find(2)])
+    puts "Created #{user.username}"
+  end
+  User.create(username: "andrew_carmer", password: "password", email: "andrew@turing.io", first_name: "andrew", last_name: "carmer", address: address, roles: [Role.find(1), Role.find(2)])
+  puts "Created #{user.username}"
+end
 
-Item.create(title: "Horseshoe", description: "Keep the open side pointed up so the luck doesn't drain out!", price: 1499, image: "https://s3.amazonaws.com/lucky2/horseshoe.png", categories: [Category.find_by(title: "Charms")])
+def create_platform_admin
+  # Included in case other platform admins will be created
+  while User.joins(:roles).where("roles.name" => "platform_admin").count < 0
+    user = User.create(username: Faker::Internet.user_name, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, address: address, roles: [Role.find(1), Role.find(3)])
+    puts "Created #{user.username}"
+  end
+  user = User.create(username: "jorge_tellez", password: "password", email: "jorge@turing.io", first_name: "jorge", last_name: "tellez", address: address, roles: [Role.find(1), Role.find(3)])
+  puts "Created #{user.username}"
+end
 
-Item.create(title: "Maneki-Neko", description: "So lucky!", price: 999, image: "https://s3.amazonaws.com/lucky2/lucky_cat.png", categories: [Category.find_by(title: "Charms")])
+def create_store(user, category)
+  store = user.stores.create(name: Faker::Company.name + " Market", status: 2)
+  while store.items.count < 25
+    create_item(store, category, file)
+  end
+end
 
-Item.create(title: "Felix Felicis", description: "A luck-potion so powerful even it's placebo effects make you a better keeper!", price: 9999, image: "https://s3.amazonaws.com/lucky2/felix_felicis.jpg", categories: [Category.find_by(title: "Potions")])
+def create_item(store, category, image)
+  item = store.items.create(title: Faker::Commerce.product_name, description: Faker::Lorem.paragraph(3), price: Faker::Commerce.price.to_i * 10**2 , categories: [category])
+  puts "Created #{item.title}."
+end
 
-Item.create(title: "Love Potion #9", description: "It won't force anyone to fall in love with you, that would be creepy, but it will make you luckier in love (if you're not creepy). 9th try at the formula. We're pretty sure we've got it right this time.", price: 9999, image: "https://s3.amazonaws.com/lucky2/love_potion_9.jpg", categories: [Category.find_by(title: "Potions")])
+def address
+  Faker::Address.street_address + " " + Faker::Address.city + ", " + Faker::Address.state + " USA"
+end
 
-Item.create(title: "And the Crowd Goes Mild!", description: "Sometimes you just want to be able to make that shot with the wadded up paper in the trash can across the room. You won't make big bucks off this one, but you'll probably get chuckles of approval.", price: 4999, image: "https://s3.amazonaws.com/lucky2/mild_luck_potion.jpg", categories: [Category.find_by(title: "Potions")])
+def create_users
+  create_registered_users
+  create_store_admin
+  create_platform_admin
+end
 
-Item.create(title: "Lucky Pat Wey Jersey", description: "A game worn jersey from former NHL player, Pat Wey!", price: 29999 , image: "https://s3.amazonaws.com/lucky2/pat_wey_jersey.jpg", categories: [Category.find_by(title: "Clothes")])
+def seed
+  create_roles
+  create_categories
+  create_users
 
-Item.create(title: "Game Day Sock", description: "Worn by one fan during every home game played on a Thursday in the month of September, but only for night games - and his team won EVERY(both) TIME!", price: 1099, image: "https://s3.amazonaws.com/lucky2/lucky_game_socks.jpg", categories: [Category.find_by(title: "Clothes")])
+  store_admins = User.joins(:roles).where("roles.name" => "store_admin").to_a
+  Category.all.each do |category|
+    create_store(store_admins.pop, category)
+    create_store(store_admins.pop, category)
+  end
+end
 
-Item.create(title: "Peyton Manning Tighty Whities", description: "We're not really sure how these were obtained. They sure smell like they were game-worn. Gotta be lucky, right?", price: 99999, image: "https://s3.amazonaws.com/lucky2/tighty_whities.jpg", categories: [Category.find_by(title: "Clothes")])
-
-Item.create(title: "Uncatchable Leprechaun", description: "You're not having luck with the weather, but if you're inside, try to nab this little guy and get his gold!", price: 9999, image: "https://s3.amazonaws.com/lucky2/leprechaun_face.png", categories: [Category.find_by(title: "Weather")])
-
-Item.create(title: "Pot O' Gold", description: "After a good rain, you were lucky enough to find the pot of gold at the end of the rainbow!", price: 99999, image: "https://s3.amazonaws.com/lucky2/pot_o_gold.png", categories: [Category.find_by(title: "Weather")])
-
-Item.create(title: "Four-Leaf Clover", description: "The sun is shining so brightly that spotting this little guy wasn't a matter of luck!", price: 999, image: "https://s3.amazonaws.com/lucky2/four-leaf-clover.png", categories: [Category.find_by(title: "Weather")])
-
-User.create(username: "johndoe", password: "password", role: 0, first_name: "John", last_name: "Doe", address: "1510 Blake Street")
-User.create(username: "janedoe", password: "password", role: 0, first_name: "Jane", last_name: "Doe", address: "1511 Blake Street")
-User.create(username: "user", password: "password", role: 0, first_name: "Tim", last_name: "Finnigan", address: "1234 Walker Street")
-User.create(username: "admin", password: "password", role: 1, first_name: "Anon", last_name: "Ymous", address: "The cloud")
+seed

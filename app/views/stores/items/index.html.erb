@@ -1,0 +1,12 @@
+<div class="text-center row">
+  <div class="padded-bottom">
+    <h1 class="green-font" >Welcome to <%= current_store.name %>!</h1>
+    <h4 class="green-font" ><%= current_store.description %></h4>
+    <%= image_tag current_store.image_url, alt: current_store.name %>
+  </div>
+  <div class="text-center row">
+    <div class="items">
+      <%= render partial: "shared/item", collection: @items %>
+    </div>
+  </div>
+</div>
